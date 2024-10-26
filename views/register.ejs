@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        /* Body and Background */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+           margin: 0;
+           background:linear-gradient(to  bottom right, rgb(0, 0, 0), rgb(87, 86, 86));
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Form Container */
+        .registration-form {
+            
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            backdrop-filter: blur(30px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Form Heading */
+        .registration-form h2 {
+            margin-bottom: 20px;
+            color: #36d1dc;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Input Fields */
+        .registration-form input[type="text"],
+        .registration-form input[type="email"],
+
+        .registration-form input[type="password"],
+        .registration-form select,
+        .registration-form input[type="file"] {
+            width: 100%;
+            padding: 12px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #d6d6d6;
+            box-sizing: border-box;
+            background-color: #666;
+        }
+        input::placeholder{
+            color: #d6d6d6;
+        }
+
+        /* Submit Button */
+        .registration-form button {
+            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            color: #fff;
+            padding: 12px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 15px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .registration-form button:hover {
+            background: linear-gradient(135deg, #5b86e5, #36d1dc);
+        }
+
+        /* Bottom Link */
+        .registration-form .link {
+            display: block;
+            margin-top: 10px;
+            color: #84a1e0;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        /* Checkbox Label */
+        .registration-form .checkbox-label {
+            font-size: 14px;
+            color: #d6d6d6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="registration-form">
+        <h2>Registration Form</h2>
+        <form action="/auth/register" method="POST">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email address" required>
+            
+           
+            <input type="password" name="password" placeholder="Password" required>
+            <select name="role" required>
+                <option value="">Select Role</option>
+                <option value="JobSeeker">JobSeeker</option>
+                <option value="Employer">Employer</option>
+            </select>
+            <input type="file" name="validDocument" >
+            <div class="checkbox-label">
+                <input type="checkbox" name="terms" required>
+                <span>Agree to terms and conditions</span>
+            </div>
+            <button type="submit">Create Account</button>
+        </form>
+        <a href="/login" class="link">Already have an account? Sign in</a>
+    </div>
+</body>
+</html>

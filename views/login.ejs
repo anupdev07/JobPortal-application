@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Dots:wght@400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Rubik+Wet+Paint&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>Login Form</title>
+    <style>
+        body {
+            background:linear-gradient(to  bottom right, rgb(0, 0, 0), rgb(87, 86, 86));
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            width: 300px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            position: relative;
+            margin: 10px 0;
+         
+        }
+        input[type="email"],
+        input[type="password"] {
+            width: 75%;
+            padding: 12px 40px; 
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            color: #5a5a5a;
+            font-size: 16px;
+            outline: none;
+            backdrop-filter: blur(15px);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+           
+        }
+        input::placeholder {
+            color: #474747;
+            opacity: 0.8; 
+        }
+        input:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #000000;
+        }
+        button {
+            width: 49%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background-color: #48cbff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #78defd;
+        }
+        button {
+            font-size: 18px;
+        }
+        a {
+            color: rgb(124, 235, 255);
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 17px;
+        }
+        img {
+            width: 60px;
+            height: 60px;
+        }
+        h3 {
+            margin-bottom: 29px;
+            font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  text-align:center ;
+        }
+      #avatar{
+            font-size: 60px;
+            color: #000000;
+            margin-bottom: 10px;
+      }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form action="auth/login" method="POST">
+        <center><i class="fas fa-user user-icon" id="avatar"></i></center>
+        <h3>Login Here</h3>
+        <div class="input-group">
+            <i class="fas fa-envelope icon"></i>
+            <input type="email" name="email" placeholder=" Your email..." required>
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock icon"></i>
+            <input type="password" name="password"placeholder="Password"  required>
+        </div>
+        <button type="submit">Login</button>
+        <a href="../register">Create Account</a>
+    </form>
+    </div>
+</body>
+</html>

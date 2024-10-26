@@ -1,8 +1,7 @@
-// controllers/authController.js
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const { User } = require('../models');
-require('dotenv').config();
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { User } = require("../models");
+require("dotenv").config();
 
 // Registration function
 exports.register = async (req, res) => {
@@ -12,19 +11,25 @@ exports.register = async (req, res) => {
     // Check if the user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user
-    const newUser = await User.create({ name, email, password: hashedPassword, role });
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+    });
 
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: "User registered successfully" });
+    res.redirect("/login");
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -36,23 +41,30 @@ exports.login = async (req, res) => {
     // Check if the user exists
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(404).json({ message: 'User not found' });
+      return res.status(404).json({ message: "User not found" });
     }
 
-    // Compare passwords
+    console.log("Entered Password:", password); // Plaintext password from user input for dubugging
+    console.log("Stored Hashed Password:", user.password); // Hashed password from database for debugging
+
     const isMatch = await bcrypt.compare(password, user.password);
+    console.log("ismatch result is ", isMatch);
     if (!isMatch) {
-      return res.status(400).json({ message: 'Incorrect password' });
+      return res.status(400).json({ message: "Incorrect password" });
     }
 
     // Generate JWT token
-    const token = jwt.sign({ id: user.id, role: user.role }, process.env.JWT_SECRET, {
-      expiresIn: '1h',
-    });
+    const token = jwt.sign(
+      { id: user.id, role: user.role },
+      process.env.JWT_SECRET || "jpsecret",
+      {
+        expiresIn: "1h",
+      }
+    );
 
-    res.status(200).json({ message: 'Login successful', token });
+    res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Server error' });
+    res.status(500).json({ message: "Server error" });
   }
 };
