@@ -4,31 +4,26 @@ module.exports = {
     await queryInterface.createTable('Companies', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
-      },
-      companyName: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      address: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      contactInfo: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      userId: {
         type: Sequelize.INTEGER,
-        allowNull: false,
         references: {
-          model: 'Users', // References to the Users table
+          model: 'Users', // Reference to the Users table
           key: 'id'
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
+      },
+      companyName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      address: {
+        type: Sequelize.STRING,
+        allowNull: false,
+      },
+      contactInfo: {
+        type: Sequelize.STRING,
+        allowNull: false,
       },
       createdAt: {
         allowNull: false,
