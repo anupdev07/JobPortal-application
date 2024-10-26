@@ -23,10 +23,11 @@ exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       role,
+      validDocument: req.file.path ,
     });
 
     res.status(201).json({ message: "User registered successfully" });
-    res.redirect("/login");
+    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -48,7 +49,7 @@ exports.login = async (req, res) => {
     console.log("Stored Hashed Password:", user.password); // Hashed password from database for debugging
 
     const isMatch = await bcrypt.compare(password, user.password);
-    console.log("ismatch result is ", isMatch);
+    
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
