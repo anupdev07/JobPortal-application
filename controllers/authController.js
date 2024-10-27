@@ -18,7 +18,7 @@ exports.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     console.log("Salt:", salt);
     const hashedPassword = await bcrypt.hash(password, salt);
-
+    
     // Create a new user
     const newUser = await User.create({
       name,
@@ -42,20 +42,14 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     // Check if the user exists
-    // const user = await User.findOne({ where: { email } });
+    const user = await User.findOne({ where: { email } });
     
-    // if (!user) {
-    //   return res.status(404).json({ message: "User not found" });
-    // }
-   
-    
-
-
-    const isMatch = await bcrypt.compare(password, user.password,(err,result)=> {
-      console.log("Result:",result);
-      console.log("Error:",err);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
     }
-    );
+
+
+    const isMatch = await bcrypt.compare(password, user.password);
     
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
@@ -69,8 +63,21 @@ exports.login = async (req, res) => {
         expiresIn: "1h",
       }
     );
-    localStorage.setItem("Token", token);
-    res.status(200).json({ message: "Login successful", token });
+    
+
+    //checking whether user is jobseeker or employer
+    
+     if(user.role === 'Employer'){
+      res.render("employer_dashboard");
+    }
+    else if(user.role === 'Admin'){
+      res.render("admin_dashboard");
+    }
+    else{
+      res.render("jobseeker_dashboard");
+    }
+
+    // res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
