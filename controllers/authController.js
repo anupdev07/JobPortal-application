@@ -15,7 +15,9 @@ exports.register = async (req, res) => {
     }
 
     // Hash the password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const salt = await bcrypt.genSalt(10);
+    console.log("Salt:", salt);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create a new user
     const newUser = await User.create({
@@ -26,8 +28,8 @@ exports.register = async (req, res) => {
       validDocument: req.file.path ,
     });
 
-    res.status(201).json({ message: "User registered successfully" });
-    
+    // res.status(201).json({ message: "User registered successfully" });
+    res.render("login");
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
@@ -40,20 +42,25 @@ exports.login = async (req, res) => {
     const { email, password } = req.body;
 
     // Check if the user exists
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
+    // const user = await User.findOne({ where: { email } });
+    
+    // if (!user) {
+    //   return res.status(404).json({ message: "User not found" });
+    // }
+   
+    
+
+
+    const isMatch = await bcrypt.compare(password, user.password,(err,result)=> {
+      console.log("Result:",result);
+      console.log("Error:",err);
     }
-
-    console.log("Entered Password:", password); // Plaintext password from user input for dubugging
-    console.log("Stored Hashed Password:", user.password); // Hashed password from database for debugging
-
-    const isMatch = await bcrypt.compare(password, user.password);
+    );
     
     if (!isMatch) {
       return res.status(400).json({ message: "Incorrect password" });
     }
-
+    
     // Generate JWT token
     const token = jwt.sign(
       { id: user.id, role: user.role },
@@ -62,7 +69,7 @@ exports.login = async (req, res) => {
         expiresIn: "1h",
       }
     );
-
+    localStorage.setItem("Token", token);
     res.status(200).json({ message: "Login successful", token });
   } catch (error) {
     console.error(error);
