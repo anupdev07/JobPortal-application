@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employer Dashboard</title>
+</head>
+<body>
+    <h1>Employer Dashboard</h1>
+
+    <!-- Navbar -->
+    <nav>
+        <a href="/employer/dashboard">Registered Companies</a> |
+        <a href="/company/register">Register New Company</a>
+    </nav>
+
+    <hr>
+
+    <!-- Registered Companies Section -->
+    <h2>Registered Companies</h2>
+    <% if (companies && companies.length > 0) { %>
+        <% companies.forEach(company => { %>
+            <div class="company-card">
+                <h3><%= company.companyName %></h3>
+                <p><strong>Address:</strong> <%= company.address %></p>
+                <p><strong>Contact Info:</strong> <%= company.contactInfo %></p>
+                <a href="/company/<%= company.id %>/jobs">Create/Manage Jobs</a>
+            </div>
+            <hr>
+        <% }) %>
+    <% } else { %>
+        <p>No companies registered yet.</p>
+    <% } %>
+</body>
+</html>
