@@ -20,6 +20,7 @@ app.use(cookieParser());
 const authRoutes = require('./routes/auth'); // For handling registration and login
 const authController = require('./controllers/authController'); // Contains registration and login logic
 const employerRoutes = require('./routes/employer'); // For handling employer actions
+const companyRoutes = require('./routes/company'); // For handling company actions
 app.get('/', (req, res) => {
   res.render('welcomepage'); 
 });
@@ -35,6 +36,7 @@ app.get('/login', (req, res) => {
 // Routes to handle form submissions for registration and login
 app.use('/auth', authRoutes); // Routes for handling auth actions (register and login)
 app.use('/employer', employerRoutes); // Routes for handling employer actions
+app.use('/company', companyRoutes); // Routes for handling company actions
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

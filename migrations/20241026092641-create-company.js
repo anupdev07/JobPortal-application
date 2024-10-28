@@ -1,17 +1,22 @@
-'use strict';
+// migrations/xxxx-create-company.js
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.createTable('Companies', {
-      id: {
-        allowNull: false,
-        primaryKey: true,
+      companyId: {
         type: Sequelize.INTEGER,
+        primaryKey: true,
+        autoIncrement: true, // Automatically increments for each new company
+        allowNull: false,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
         references: {
-          model: 'Users', // Reference to the Users table
-          key: 'id'
+          model: 'Users', // References the Users table
+          key: 'id',
         },
         onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
+        onDelete: 'CASCADE',
       },
       companyName: {
         type: Sequelize.STRING,
@@ -28,16 +33,17 @@ module.exports = {
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
+        defaultValue: Sequelize.NOW,
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.NOW
-      }
+        defaultValue: Sequelize.NOW,
+      },
     });
   },
+
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable('Companies');
-  }
+  },
 };
