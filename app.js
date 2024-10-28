@@ -21,9 +21,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 const authRoutes = require('./routes/auth'); // For handling registration and login
 const authController = require('./controllers/authController'); // Contains registration and login logic
 
-// app.get('/', (req, res) => {
-//   res.render('welcomepage'); // Renders the register.ejs form
-// });
+app.get('/', (req, res) => {
+  res.render('welcomepage'); 
+});
 // Routes to render registration and login forms
 app.get('/register', (req, res) => {
   res.render('register'); // Renders the register.ejs form

@@ -32,7 +32,15 @@
             backdrop-filter: blur(30px);
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-
+        .button-glow {
+      animation: glow 1.5s ease-in-out infinite;
+    }
+        @keyframes glow {
+      0%, 100% {
+        box-shadow: 0px 0px 10px rgba(184, 128, 243, 0.8);
+      }
+      
+    }
         /* Form Heading */
         .registration-form h2 {
             margin-bottom: 20px;
@@ -64,7 +72,7 @@
 
         /* Submit Button */
         .registration-form button {
-            background: linear-gradient(135deg, #36d1dc, #5b86e5);
+            background: linear-gradient(135deg, #368cdc, #be5be5);
             color: #fff;
             padding: 12px;
             border: none;
@@ -101,7 +109,7 @@
     </style>
 </head>
 <body>
-    <div class="registration-form">
+    <div class="registration-form button-glow">
         <h2>Registration Form</h2>
         <form action="/auth/register" method="POST" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Name" required>

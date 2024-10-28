@@ -72,21 +72,31 @@
             padding: 12px;
             border: none;
             border-radius: 5px;
-            background-color: #48cbff;
+            background: #8a2be2;
             color: white;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
+            transition: all 0.3s ease;
             margin-top: 10px;
         }
         button:hover {
-            background-color: #78defd;
+            background-color: #a964e9;
         }
         button {
             font-size: 18px;
         }
+        .button-glow {
+      animation: glow 1.5s ease-in-out infinite;
+    }
+        @keyframes glow {
+      0%, 100% {
+        box-shadow: 0px 0px 10px rgba(184, 128, 243, 0.8);
+      }
+      
+    }
         a {
-            color: rgb(124, 235, 255);
+            color:rgba(252, 252, 252, 0.8);
             text-decoration: none;
             margin-left: 10px;
             font-size: 17px;
@@ -113,7 +123,7 @@
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="container button-glow">
         <form action="/auth/login" method="POST">
         <center><i class="fas fa-user user-icon" id="avatar"></i></center>
         <h3>Login Here</h3>
@@ -125,7 +135,7 @@
             <i class="fas fa-lock icon"></i>
             <input type="password" name="password"placeholder="Password"  >
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" >Login</button>
         <a href="../register">Create Account</a>
     </form>
     </div>

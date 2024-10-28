@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome to Next Step Workforce Solutions</title>
+  <style>
+    /* Base styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body, html {
+      height: 100%;
+      font-family: Arial, sans-serif;
+      background: #1b1d23;
+      color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Background and overlay */
+    .background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      
+      background-size: cover;
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    /* Container and Content */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      /* padding: 2rem; */
+      text-align: center;
+      color: #eaeaf0;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #c9a6ff;
+      display: flex;
+      
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+    img {
+      width: 48px;
+      height: 48px;
+      animation: rotate 5s linear infinite;
+    }
+    
+    p {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: #b2b6c5;
+      margin-bottom: 2rem;
+      margin-left: 8%;
+      margin-right: 8%;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Cards Layout */
+    .cards {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      
+    }
+
+    .card {
+      background: rgba(33, 31, 47, 0.85);
+      padding: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 400px;
+      color: #eaeaf0;
+      text-align: left;
+      box-shadow: 0px 8px 16px rgba(127, 89, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      
+      box-shadow: 0px 10px 20px rgba(167, 104, 216, 0.4);
+    }
+    .card h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      color: #c9a6ff;
+    }
+    .card p {
+      font-size: 1rem;
+      color: #b2b6c5;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Buttons */
+    .button {
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      background: linear-gradient(135deg, #7f59ff, #a368d8);
+      border: none;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+      
+      box-shadow: 0px 4px 12px rgba(127, 89, 255, 0.4);
+    }
+    .button:hover {
+      transform: scale(1.05);
+      box-shadow: 0px 6px 15px rgba(167, 104, 216, 0.6);
+    }
+
+    /* Keyframes */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes rotate {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #9fa3b1;
+      animation: fadeIn 3s ease-in-out;
+    }
+    .header-text {
+      font-size: 1.5rem;
+      color: #d1c3ff;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Background Layer -->
+  <div class="background"></div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <h1>
+      
+      Welcome to Next Step Workforce Solutions
+    </h1>
+    <p>One click away from finding your dream job or hiring top talent! Join us to discover endless opportunities, 
+       connect with leading employers, and take the next step in your career journey.</p>
+       <img src="https://img.icons8.com/dusk/64/000000/find-matching-job.png" alt="Job Icon" />
+
+       <div class="header-text"><i>"One click away from finding your dream job or hiring top talents"</i></div>
+
+    <!-- Cards Section -->
+    <div class="cards">
+      <!-- Register Card -->
+      <div class="card">
+       <center> <h2>Register</h2> </center>
+        <p>Sign up as a job seeker to access the latest job openings or as a company to post jobs and simplify your hiring process. No ads, no hassle!</p>
+       <center> <a href="/register" class="button">Register</a></center>
+      </div>
+
+      <!-- Login Card -->
+      <div class="card">
+       <center> <h2>Login</h2> </center>
+        <p>Already have an account? Log in to view and apply for jobs or manage your posted job listings with ease and efficiency.</p>
+      <center>  <a href="/login" class="button">Login</a> </center>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+      &copy; 2024 Next Step Workforce Solutions. All rights reserved.
+    </div>
+  </div>
+
+</body>
+</html>
