@@ -2,9 +2,8 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
-
-// Initialize app and load environment variables
 const app = express();
+const cookieParser = require('cookie-parser');
 dotenv.config();
 
 // Set EJS as the view engine
@@ -16,7 +15,7 @@ app.use(express.json());
 
 // Serve static files from the 'public' folder
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(cookieParser());
 // Import routes and controllers
 const authRoutes = require('./routes/auth'); // For handling registration and login
 const authController = require('./controllers/authController'); // Contains registration and login logic

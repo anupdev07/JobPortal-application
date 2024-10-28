@@ -1,9 +1,9 @@
-
+// middleware/authMiddleware.js
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
 module.exports = (req, res, next) => {
-  const token = localStorage.getItem('Token');
+  const token = req.cookies.token; // Read token from cookies
   if (!token) {
     return res.status(403).json({ message: 'No token provided' });
   }
