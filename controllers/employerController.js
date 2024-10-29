@@ -1,13 +1,13 @@
-// controllers/employerController.js
 const { Company } = require('../models');
 
+// Render the Employer Dashboard
 exports.dashboard = async (req, res) => {
   try {
-    const employerId = req.userId; // Assuming userId is stored in req via authMiddleware
-
-    // Fetch all companies associated with this employer
-    const companies = await Company.findAll({ where: { id: employerId } });
-
+    const employerId = req.userId; // Assume userId is available from auth middleware
+    
+    // Fetch all companies registered by this employer
+    const companies = await Company.findAll({ where: { userId: employerId } });
+    
     // Render the employer dashboard with the list of companies
     res.render('employerDashboard', { companies });
   } catch (error) {

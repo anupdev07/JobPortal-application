@@ -37,6 +37,7 @@ app.get('/login', (req, res) => {
 app.use('/auth', authRoutes); // Routes for handling auth actions (register and login)
 app.use('/employer', employerRoutes); // Routes for handling employer actions
 app.use('/company', companyRoutes); // Routes for handling company actions
+app.use('/employer', employerRoutes); // Routes for handling employer actions
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
