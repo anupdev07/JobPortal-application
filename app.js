@@ -21,6 +21,7 @@ const authRoutes = require('./routes/auth'); // For handling registration and lo
 const authController = require('./controllers/authController'); // Contains registration and login logic
 const employerRoutes = require('./routes/employer'); // For handling employer actions
 const companyRoutes = require('./routes/company'); // For handling company actions
+const jobRoutes = require('./routes/jobs'); // For handling job actions
 app.get('/', (req, res) => {
   res.render('welcomepage'); 
 });
@@ -38,6 +39,7 @@ app.use('/auth', authRoutes); // Routes for handling auth actions (register and 
 app.use('/employer', employerRoutes); // Routes for handling employer actions
 app.use('/company', companyRoutes); // Routes for handling company actions
 app.use('/employer', employerRoutes); // Routes for handling employer actions
+app.use('/', jobRoutes); // Routes for handling job actions
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
