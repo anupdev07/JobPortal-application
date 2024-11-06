@@ -5,37 +5,137 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Jobs for <%= company.companyName %></title>
     <style>
-        /* Main container */
+        /* General styling */
+        * {
+            scroll-behavior: smooth;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body, html {
+            height: 100%;
+            background: #1a1a2e;
+            color: #f4f4f9;
+            overflow-x: hidden;
+        }
+
+        /* Flex container styling */
         .container {
             display: flex;
             min-height: 100vh;
         }
 
-        /* Sidebar Navigation */
+        /* Sidebar styling */
         .sidebar {
             background: #2a2a40;
             width: 250px;
             padding: 1rem;
-            display: flex;
-            flex-direction: column;
+            position: fixed;
+            height: 100vh;
+            color: #f4f4f9;
+            overflow-y: auto;
+        }
+        .sidebar h2 {
+            color: #ffcc00;
+            font-weight: bold;
+            margin-bottom: 2rem;
         }
         .sidebar a {
-            color: #fff;
-            text-decoration: none;
+            color: #f4f4f9;
+            display: block;
             padding: 1rem;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
             transition: background 0.3s ease;
+            text-decoration: none;
         }
         .sidebar a:hover {
-            background: #404068;
+            background: #383856;
+            color: #ffcc00;
         }
 
-        /* Content Area */
+        /* Main content styling */
         .content {
-            flex-grow: 1;
+            margin-left: 250px;
             padding: 2rem;
-            background: #f4f4f9;
+            flex-grow: 1;
+            background: #1a1a2e;
+        }
+
+        /* Header and section titles */
+        h1, h2 {
+            color: #ffcc00;
+        }
+
+        /* Form styling */
+        form {
+            display: flex;
+            flex-direction: column;
+            background: #2a2a40;
+            padding: 2rem;
+            border-radius: 8px;
+            color: #f4f4f9;
+        }
+        label {
+            margin: 1rem 0 0.5rem;
+        }
+        input, textarea, select, button {
+            padding: 0.8rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            color: #f4f4f9;
+            background: #383856;
+            width: 68%;
+        }
+        button {
+            background: #7f59ff;
+            color: #fff;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #5c44d4;
+        }
+
+        /* Job cards styling */
+        .job-card {
+            background: #2a2a40;
+            padding: 1.5rem;
+            margin: 1rem;
+            border-radius: 8px;
+            color: #f4f4f9;
+            width: 45%;
+            vertical-align: top;
+        }
+        .job-card h3 {
+            color: #ffcc00;
+            margin-bottom: 0.5rem;
+        }
+        .job-card p {
+            margin: 0.5rem 0;
+        }
+
+        /* Job Listings and Job Applications sections */
+        .section {
+            padding: 2rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            background-color: #2a2a40;
+        }
+
+        /* Responsiveness */
+        @media (max-width: 768px) {
+            .job-card {
+                width: 100%;
+            }
+            .sidebar {
+                width: 200px;
+            }
+            .content {
+                margin-left: 200px;
+            }
         }
     </style>
 </head>
@@ -44,15 +144,72 @@
         <!-- Sidebar Navigation -->
         <div class="sidebar">
             <h2>Job Dashboard</h2>
-            <a href="/company/<%= company.companyId %>/jobs/create">Create New Job</a>
-            <a href="/company/<%= company.companyId %>/jobs/view">Your Job Listings</a>
-            <a href="/company/<%= company.companyId %>/jobs/applications">View/Manage Applications</a>
+            <a href="#createJobForm">Create New Job</a>
+            <a href="#jobListings">View Job Listings</a>
+            <a href="#jobApplications">View/Manage Applications</a>
         </div>
 
         <!-- Main Content Area -->
         <div class="content">
             <h1>Manage Jobs for <%= company.companyName %></h1>
-            <p>Select an option from the sidebar to manage jobs for this company.</p>
+
+            <!-- Create Job Form Section -->
+            <section id="createJobForm" class="section">
+                <h2>Create New Job</h2>
+                <form action="/company/<%= company.companyId %>/jobs/create" method="POST">
+                    <label for="jobTitle">Job Title:</label>
+                    <input type="text" id="jobTitle" name="jobTitle" required>
+
+                    <label for="jobDescription">Job Description:</label>
+                    <textarea id="jobDescription" name="jobDescription" required></textarea>
+
+                    <label for="salary">Salary:</label>
+                    <input type="number" id="salary" name="salary" required>
+
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location" required>
+
+                    <label for="jobType">Job Type:</label>
+                    <select id="jobType" name="jobType" required>
+                        <option value="Full-time">Full-time</option>
+                        <option value="Part-time">Part-time</option>
+                    </select>
+
+                    <label for="postingDate">Posting Date:</label>
+                    <input type="date" id="postingDate" name="postingDate" required>
+
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="date" id="expiryDate" name="expiryDate" required>
+
+                    <button type="submit">Create Job</button>
+                </form>
+            </section>
+
+            <!-- Job Listings Section -->
+            <section id="jobListings" class="section">
+                <h2>Your Job Listings</h2>
+                <% if (jobs && jobs.length > 0) { %>
+                    <% jobs.forEach(job => { %>
+                        <div class="job-card">
+                            <h3><%= job.jobTitle %></h3>
+                            <p><strong>Description:</strong> <%= job.jobDescription %></p>
+                            <p><strong>Salary:</strong> <%= job.salary %></p>
+                            <p><strong>Location:</strong> <%= job.location %></p>
+                            <p><strong>Type:</strong> <%= job.jobType %></p>
+                            <p><strong>Posting Date:</strong> <%= job.postingDate.toISOString().split('T')[0] %></p>
+                            <p><strong>Expiry Date:</strong> <%= job.expiryDate.toISOString().split('T')[0] %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No jobs found for this company.</p>
+                <% } %>
+            </section>
+
+            <!-- Job Applications Section (Placeholder) -->
+            <section id="jobApplications" class="section">
+                <h2>View/Manage Job Applications</h2>
+                <p>In Progress...</p>
+            </section>
         </div>
     </div>
 </body>
