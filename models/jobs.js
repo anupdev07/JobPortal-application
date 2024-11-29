@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // Associate Job with Company
       Job.belongsTo(models.Company, { foreignKey: 'companyId' });
+      Job.hasMany(models.Application, { foreignKey: 'jobId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
     }
   }
 

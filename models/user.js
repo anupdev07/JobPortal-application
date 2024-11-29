@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
       // One-to-one relationship with Company
-      User.hasOne(models.Company, { foreignKey: 'userid' });
+      User.hasMany(models.Company, { foreignKey: 'userid', onDelete: 'CASCADE' });
+      User.hasMany(models.Application, { foreignKey: 'userId', onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+
     }
 
     // Method to validate password during login

@@ -25,6 +25,7 @@
             display: flex;
             min-height: 100vh;
         }
+       
 
         /* Sidebar styling */
         .sidebar {
@@ -82,7 +83,6 @@
             background: rgba(33, 31, 47, 0);
             padding: 2rem;
             border-radius: 12px;
-            
         }
         label {
             margin: 1rem 0 0.5rem;
@@ -118,7 +118,6 @@
             margin: 1rem 0;
             border-radius: 8px;
             color: #eaeaf0;
-           
         }
         .job-card h3 {
             color: #c9a6ff;
@@ -135,7 +134,6 @@
             margin: 1rem 0;
             border-radius: 12px;
             background: rgba(19, 17, 29, 0.85);
-            
         }
 
         /* Responsiveness */
@@ -150,6 +148,29 @@
                 margin-left: 200px;
             }
         }
+        a{
+            color: #eaeaf0;
+            display: block;
+        }
+        td{
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #eaeaf0;
+            padding: 8px;
+        }
+        th{
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #eaeaf0;
+            padding: 8px;
+        }
+       table{
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px ;
+        
+        border : 1px solid #eaeaf0;    
+              }
     </style>
 </head>
 <body>
@@ -160,21 +181,23 @@
             <a href="#createJobForm">Create New Job</a>
             <a href="#jobListings">View Job Listings</a>
             <a href="#jobApplications">View/Manage Applications</a>
+            <a href="/employer/dashboard" >Go Back</a>
         </div>
 
         <!-- Main Content Area -->
         <div class="content">
-            <h1>Manage Jobs for <%= company.companyName %></h1>
+            <!-- <center><h1>Manage Jobs for <%= company.companyName %></h1></center> -->
 
             <!-- Create Job Form Section -->
             <section id="createJobForm" class="section">
                 <h2>Create New Job</h2>
                 <form action="/company/<%= company.companyId %>/jobs/create" method="POST">
+                    
                     <label for="jobTitle">Job Title:</label>
                     <input type="text" id="jobTitle" name="jobTitle" required>
 
                     <label for="jobDescription">Job Description:</label>
-                    <textarea id="jobDescription" name="jobDescription" required></textarea>
+                    <textarea id="jobDescription" name="jobDescription" ></textarea>
 
                     <label for="salary">Salary:</label>
                     <input type="number" id="salary" name="salary" required>
@@ -218,10 +241,53 @@
                 <% } %>
             </section>
 
-            <!-- Job Applications Section (Placeholder) -->
+            <!-- Job Applications Section -->
             <section id="jobApplications" class="section">
                 <h2>View/Manage Job Applications</h2>
-                <p>In Progress...</p>
+                <% if (applications && applications.length > 0) { %>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Applicant Name</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Resume</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% applications.forEach(application => { %>
+                                <tr>
+                                    <td><%= application.User.name %></td>
+                                    <td><%= application.User.email %></td>
+                                    <td><%= application.status %></td>
+                                    <td>
+                                        <% if (application.User.validDocument) { %>
+                                            
+                                            <a href="/<%= application.User.validDocument %>" target="_blank">View Resume</a>
+
+                                        <% } else { %>
+                                            N/A
+                                        <% } %>
+                                    </td>
+                                    <td>
+                                        <form action="/applications/<%= application.id %>/approve" method="POST" style="display:inline;">
+                                            <button type="submit" class="approve" style=" background: #1fbd00;">Approve</button>
+                                        </form>
+                                        <form action="/applications/<%= application.id %>/reject" method="POST" style="display:inline;">
+                                            <button type="submit" class="reject" style="color:red;background: #e0e0e0;" >Reject</button>
+                                        </form>
+                                        <form action="/applications/<%= application.id %>/delete" method="POST" style="display:inline;">
+                                            <button type="submit" class="delete" style=" background: #bd0000;" >Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } else { %>
+                    <p>No applications available for this job.</p>
+                <% } %>
             </section>
         </div>
     </div>
