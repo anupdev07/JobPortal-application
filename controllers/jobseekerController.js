@@ -1,16 +1,16 @@
 // controllers/jobseekerController.js
-console.log("controller is triggered");
+
 const { Job, Company } = require('../models');
 
 // Fetch all job listings
 getJobListings = async (req, res) => {
-  console.log("getJobListings is triggered");
+  // console.log("getJobListings is triggered");
   try {
     const jobs = await Job.findAll({
-      attributes: ['id', 'jobTitle', 'location', 'companyId'],
+      attributes: ['id', 'jobTitle','jobDescription','location', 'jobType', 'salary','postingDate','expiryDate','companyId'],
       include: { model: Company, attributes: ['companyName'] },
     });
- 
+    // console.log(jobs);
     res.render('jobseekerDashboard', { jobs });
   } catch (error) {
     console.error(error);

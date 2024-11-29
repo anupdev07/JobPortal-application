@@ -62,6 +62,7 @@ exports.login = async (req, res) => {
     // Redirect based on user role
     if (user.role === 'Employer') {
       res.redirect("/employer/dashboard");
+    
     } else if (user.role === 'Admin') {
       res.redirect("/admin/dashboard");
     } else {
@@ -71,4 +72,8 @@ exports.login = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: "Server error" });
   }
+};
+exports.logout = (req, res) => {
+  res.clearCookie('token');
+  res.redirect('/login'); // Redirect to login page after logout
 };

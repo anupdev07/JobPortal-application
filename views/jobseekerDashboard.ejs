@@ -40,10 +40,13 @@
       font-size: 1.1rem;
       margin: 1rem 0;
       text-decoration: none;
-      transition: color 0.3s ease;
+      transition: color 0.3s ease, background 0.3s ease;
+      padding: 0.5rem;
+      border-radius: 5px;
     }
     .sidebar a:hover {
-      color: #7f59ff;
+      color: #fff;
+      background: #7f59ff;
     }
     .logout {
       margin-top: auto;
@@ -81,7 +84,6 @@
       background: rgba(33, 31, 47, 0.85);
       border-radius: 12px;
       padding: 1.5rem;
-      box-shadow: 0px 8px 16px rgba(127, 89, 255, 0.3);
     }
     .section h2 {
       font-size: 1.5rem;
@@ -103,16 +105,11 @@
       background: #252a41;
       border-radius: 8px;
       padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       color: #eaeaf0;
     }
     .job-item h3 {
       font-size: 1.2rem;
-    }
-    .job-item form {
-      display: inline;
+      margin-bottom: 0.5rem;
     }
     .job-item button {
       padding: 0.5rem 1rem;
@@ -136,7 +133,7 @@
     <h2>Dashboard</h2>
     <a href="#job-listings">Job Listings</a>
     <a href="#applications">My Applications</a>
-    <a href="#logout" class="logout">Logout</a>
+    <a href="/logout" class="logout">Logout</a>
   </div>
 
   <!-- Main Content -->
@@ -151,11 +148,16 @@
       <div class="job-list">
         <% jobs.forEach(job => { %>
           <div class="job-item">
-            <div>
-              <h3><%= job.jobTitle %></h3>
-              <p><%= job.Company.companyName %> - <%= job.location %></p>
-            </div>
+            <h3><%= job.jobTitle %></h3>
+            <p><strong>Company:</strong> <%= job.Company.companyName %></p>
+            <p><strong>Location:</strong> <%= job.location || 'N/A' %></p>
+            <p><strong>Type:</strong> <%= job.jobType || 'N/A' %></p>
+            <p><strong>Salary:</strong> $<%= job.salary || 'N/A' %></p>
+            <p><strong>Description:</strong> <%= job.jobDescription || 'N/A' %></p>
+            <p><strong>Posting Date:</strong> <%= job.postingDate ? job.postingDate.toDateString() : 'N/A' %></p>
+            <p><strong>Expiry Date:</strong> <%= job.expiryDate ? job.expiryDate.toDateString() : 'N/A' %></p>
             <form action="/apply/<%= job.id %>" method="POST">
+              <br>
               <button type="submit">Apply</button>
             </form>
           </div>

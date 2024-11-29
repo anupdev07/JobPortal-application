@@ -9,7 +9,7 @@ exports.dashboard = async (req, res) => {
     const companies = await Company.findAll({ where: { userId: employerId } });
     
     // Render the employer dashboard with the list of companies
-    res.render('employerDashboard', { companies });
+    res.render('employerDashboard', { companies });    
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Error loading dashboard' });

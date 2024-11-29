@@ -7,5 +7,5 @@ const uploadMiddleware = require('../middleware/uploadMiddleware');
 router.post('/register', uploadMiddleware, authController.register);
 //login route
 router.post('/login', authController.login);
-
+router.get('/logout', authController.logout);
 module.exports = router;

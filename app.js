@@ -34,6 +34,7 @@ app.get('/register', (req, res) => {
 app.get('/login', (req, res) => {
   res.render('login'); // Renders the login.ejs form
 });
+app.get('/logout', authController.logout);
 
 //using routes
 app.use('/auth', authRoutes); // Routes for handling auth actions (register and login)
@@ -42,6 +43,7 @@ app.use('/company', companyRoutes); // Routes for handling company actions
 app.use('/employer', employerRoutes); // Routes for handling employer actions
 app.use('/', jobRoutes); // Routes for handling job actions
 app.use('/', jobseekerRoutes); // Routes for handling jobseeker actions
+
 
 // Start the server
 const PORT = process.env.PORT || 3000;

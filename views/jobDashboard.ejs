@@ -15,8 +15,8 @@
         }
         body, html {
             height: 100%;
-            background: #1a1a2e;
-            color: #f4f4f9;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            color: #e0e0e0;
             overflow-x: hidden;
         }
 
@@ -28,31 +28,34 @@
 
         /* Sidebar styling */
         .sidebar {
-            background: #2a2a40;
+            background: #111;
             width: 250px;
-            padding: 1rem;
+            padding: 2rem 1rem;
             position: fixed;
             height: 100vh;
-            color: #f4f4f9;
-            overflow-y: auto;
+            color: #eaeaf0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .sidebar h2 {
-            color: #ffcc00;
+            color: #c9a6ff;
             font-weight: bold;
             margin-bottom: 2rem;
+            font-size: 1.8rem;
         }
         .sidebar a {
-            color: #f4f4f9;
+            color: #eaeaf0;
             display: block;
-            padding: 1rem;
+            padding: 0.75rem 1rem;
             font-size: 1.1rem;
             margin-bottom: 0.5rem;
-            transition: background 0.3s ease;
+            transition: color 0.3s ease;
             text-decoration: none;
+            text-align: center;
         }
         .sidebar a:hover {
-            background: #383856;
-            color: #ffcc00;
+            color: #7f59ff;
         }
 
         /* Main content styling */
@@ -60,69 +63,79 @@
             margin-left: 250px;
             padding: 2rem;
             flex-grow: 1;
-            background: #1a1a2e;
         }
 
         /* Header and section titles */
-        h1, h2 {
-            color: #ffcc00;
+        h1 {
+            font-size: 2.5rem;
+            color: #c9a6ff;
+        }
+        h2 {
+            color: #d1c3ff;
+            margin-bottom: 1rem;
         }
 
         /* Form styling */
         form {
             display: flex;
             flex-direction: column;
-            background: #2a2a40;
+            background: rgba(33, 31, 47, 0);
             padding: 2rem;
-            border-radius: 8px;
-            color: #f4f4f9;
+            border-radius: 12px;
+            
         }
         label {
             margin: 1rem 0 0.5rem;
+            color: #d1c3ff;
         }
-        input, textarea, select, button {
+        input, textarea, select {
             padding: 0.8rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 1rem;
-            color: #f4f4f9;
-            background: #383856;
-            width: 68%;
+            color: #e0e0e0;
+            background: #252a41;
+            margin-bottom: 1rem;
         }
         button {
-            background: #7f59ff;
+            padding: 0.8rem;
+            font-size: 1rem;
             color: #fff;
+            background: linear-gradient(135deg, #7f59ff, #a368d8);
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-            transition: background 0.3s ease;
+            transition: transform 0.3s ease;
         }
         button:hover {
-            background: #5c44d4;
+            transform: scale(1.05);
         }
 
         /* Job cards styling */
         .job-card {
-            background: #2a2a40;
+            background: #131625;
             padding: 1.5rem;
-            margin: 1rem;
+            margin: 1rem 0;
             border-radius: 8px;
-            color: #f4f4f9;
-            width: 45%;
-            vertical-align: top;
+            color: #eaeaf0;
+           
         }
         .job-card h3 {
-            color: #ffcc00;
+            color: #c9a6ff;
             margin-bottom: 0.5rem;
         }
         .job-card p {
             margin: 0.5rem 0;
+            color: #b2b6c5;
         }
 
         /* Job Listings and Job Applications sections */
         .section {
             padding: 2rem;
             margin: 1rem 0;
-            border-radius: 8px;
-            background-color: #2a2a40;
+            border-radius: 12px;
+            background: rgba(19, 17, 29, 0.85);
+            
         }
 
         /* Responsiveness */
