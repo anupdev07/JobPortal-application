@@ -22,7 +22,7 @@ module.exports = {
         allowNull: false
       },
       role: {
-        type: Sequelize.ENUM('JobSeeker', 'Employer'),
+        type: Sequelize.ENUM('JobSeeker', 'Employer', 'Admin'),
         allowNull: false
       },
       validDocument: {
